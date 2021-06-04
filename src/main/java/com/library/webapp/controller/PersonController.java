@@ -49,7 +49,7 @@ public class PersonController {
         }).orElseThrow(() -> new ResourceNotFoundException("Person "+ person.getFirstname() + " not found"));
     }
     @DeleteMapping(value = "/person/delete/{id}")
-    public ResponseEntity<?> deletePerson(@PathVariable Long id) {
+    public ResponseEntity<?> deletePerson(@PathVariable("id") Long id) {
         return personService.findById(id).map(p -> {
             personService.delete(p);
             return ResponseEntity.ok().build();

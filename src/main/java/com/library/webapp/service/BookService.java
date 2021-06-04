@@ -2,6 +2,7 @@ package com.library.webapp.service;
 
 
 import com.library.webapp.model.Book;
+import com.library.webapp.model.Person;
 import com.library.webapp.repository.BookRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,5 +36,10 @@ public class BookService {
     public Book save(Book book) {
         log.warn("Saving new book");
         return bookRepository.save(book);
+    }
+
+    public void delete(Book book) {
+        log.info("Deleting book");
+        bookRepository.delete(book);
     }
 }

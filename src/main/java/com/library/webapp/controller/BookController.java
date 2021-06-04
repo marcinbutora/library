@@ -1,5 +1,6 @@
 package com.library.webapp.controller;
 
+import com.library.webapp.exception.ResourceNotFoundException;
 import com.library.webapp.model.Book;
 import com.library.webapp.service.BookService;
 import lombok.AllArgsConstructor;
@@ -40,12 +41,20 @@ public class BookController {
     }
 
     @PutMapping(value = "/book/update/{id}")
-    public ResponseEntity<?> updateBook(@RequestBody Book book, @PathVariable("id") Long id) {
-        if(bookService.findById(id).isPresent()) {
-            bookService.save(book);
-        } else {
-            return new ResponseEntity("Book not found", HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity("Book updated successfully", HttpStatus.OK);
+    public Book updateBook(@RequestBody Book book, @PathVariable("id") Long id) {
+        return bookService.findById(id).map(b -> {
+            b.setTitle(book.getTitle());
+            b.setDescription(book.getDescription());
+            b.setIsbn(book.getIsbn());
+            return bookService.save(b);
+        }).orElseThrow(() -> new ResourceNotFoundException("Book " + book.getTitle() + "not found"));
+    }
+
+    @DeleteMapping(value = "/book/delete/{id}")
+    public ResponseEntity<?> deleteBook(@PathVariable("id") Long id) {
+        return bookService.findById(id).map(b -> {
+            bookService.delete(b);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new ResourceNotFoundException("Book not found"));
     }
 }
