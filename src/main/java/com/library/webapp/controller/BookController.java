@@ -47,7 +47,7 @@ public class BookController {
             b.setDescription(book.getDescription());
             b.setIsbn(book.getIsbn());
             return bookService.save(b);
-        }).orElseThrow(() -> new ResourceNotFoundException("Book " + book.getTitle() + "not found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("Book not found"));
     }
 
     @DeleteMapping(value = "/book/delete/{id}")

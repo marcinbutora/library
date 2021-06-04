@@ -46,7 +46,7 @@ public class PersonController {
             p.setLastname(person.getLastname());
             p.setCity(person.getCity());
             return personService.save(p);
-        }).orElseThrow(() -> new ResourceNotFoundException("Person "+ person.getFirstname() + " not found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("Person not found"));
     }
     @DeleteMapping(value = "/person/delete/{id}")
     public ResponseEntity<?> deletePerson(@PathVariable("id") Long id) {
