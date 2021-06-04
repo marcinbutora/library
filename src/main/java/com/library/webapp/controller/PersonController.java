@@ -1,6 +1,6 @@
 package com.library.webapp.controller;
 
-import com.library.webapp.model.Book;
+import com.library.webapp.exception.ResourceNotFoundException;
 import com.library.webapp.model.Person;
 import com.library.webapp.service.PersonService;
 import lombok.AllArgsConstructor;
@@ -40,13 +40,20 @@ public class PersonController {
     }
 
     @PutMapping(value = "/person/update/{id}")
-    public ResponseEntity<?> updatePerson(@RequestBody Person person, @PathVariable("id") Long id) {
-        if(personService.findById(id).isPresent()) {
-            personService.save(person);
-        } else {
-            return new ResponseEntity("Person not found", HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity("Person updated successfully", HttpStatus.OK);
+    public Person updatePerson(@RequestBody Person person, @PathVariable("id") Long id) {
+        return personService.findById(id).map(p -> {
+            p.setFirstname(person.getFirstname());
+            p.setLastname(person.getLastname());
+            p.setCity(person.getCity());
+            return personService.save(p);
+        }).orElseThrow(() -> new ResourceNotFoundException("Person "+ person.getFirstname() + " not found"));
+    }
+    @DeleteMapping(value = "/person/delete/{id}")
+    public ResponseEntity<?> deletePerson(@PathVariable Long id) {
+        return personService.findById(id).map(p -> {
+            personService.delete(p);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new ResourceNotFoundException("Person not found"));
     }
 
 

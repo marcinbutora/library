@@ -10,10 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 @Slf4j
 public class PersonService {
     private PersonRepository personRepository;
+
+    public PersonService(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
 
     public List<Person> findAllPersons() {
         log.info("Getting info about persons");
@@ -32,5 +35,10 @@ public class PersonService {
 
     public List<Person> findByLastname(String lastname) {
         return personRepository.findByLastname(lastname);
+    }
+
+    public void delete(Person person) {
+        log.info("Deleting person");
+        personRepository.delete(person);
     }
 }
