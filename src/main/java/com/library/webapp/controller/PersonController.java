@@ -18,17 +18,17 @@ import java.util.Optional;
 public class PersonController {
     private PersonService personService;
 
-    @GetMapping(value = "/listPerson")
+    @GetMapping(value = "/person/list")
     public List<Person> getAllPersons() {
         return personService.findAllPersons();
     }
 
-    @GetMapping(value = "/personByLastname/{lastname}")
+    @GetMapping(value = "/person/list/bylastname/{lastname}")
     public List<Person> getPersonByLastname(@PathVariable("lastname") String lastname) {
         return personService.findByLastname(lastname);
     }
 
-    @GetMapping(value = "/personById/{id}")
+    @GetMapping(value = "/person/byid/{id}")
     public Optional<Person> getPersonById(@PathVariable("id") Long id) {
         return personService.findById(id);
     }
