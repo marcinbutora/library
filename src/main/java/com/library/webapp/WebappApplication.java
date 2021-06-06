@@ -10,6 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootApplication
@@ -29,8 +31,8 @@ public class WebappApplication implements CommandLineRunner {
 		Book book1 = new Book("Duchy", "Książka o duchach", "1234-5678");
 		Book book2 = new Book("Kosmici", "Książka o kosmitach", "2345-6789");
 
-		Person person1 = new Person("Stanisław", "Kowalski", "Międzyrzecze Górne");
-		Person person2 = new Person("Aleksandra", "Nowicka", "Zalesie");
+		Person person1 = new Person("Stanisław", "Kowalski", "Międzyrzecze Górne", LocalDateTime.of(2021,10,21,10,20,00));
+		Person person2 = new Person("Aleksandra", "Nowicka", "Zalesie", LocalDateTime.of(2021,10,22,15,22,45));
 
 		bookRepository.saveAll(List.of(book1,book2));
 		personRepository.saveAll(List.of(person1,person2));

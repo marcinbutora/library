@@ -9,5 +9,6 @@ CREATE TABLE IF NOT EXISTS person (
     id int primary key auto_increment,
     firstname VARCHAR(255) NOT NULL,
     lastname VARCHAR(255) NOT NULL,
-    city VARCHAR(255) NOT NULL
+    city VARCHAR(255) NOT NULL,
+    created DATETIME NOT NULL
 );
