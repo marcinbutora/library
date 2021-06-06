@@ -18,6 +18,7 @@ import java.util.Optional;
 public class PersonController {
     private PersonService personService;
 
+
     @GetMapping(value = "/person/list")
     public List<Person> getAllPersons() {
         return personService.findAllPersons();
