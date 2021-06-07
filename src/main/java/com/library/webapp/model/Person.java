@@ -6,8 +6,9 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -23,6 +24,9 @@ public class Person {
     private String city;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime created;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private List<Rental> rentalSet = new ArrayList<>();
 
     public Person(Long id, String firstname, String lastname, String city, LocalDateTime created) {
         this.id = id;

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,6 +20,9 @@ public class Book {
     private String title;
     private String description;
     private String isbn;
+
+    @OneToMany(mappedBy = "book")
+    private List<Rental> rentalSet = new ArrayList<>();
 
     public Book(String title, String description, String isbn) {
         this.title = title;

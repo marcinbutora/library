@@ -12,3 +12,10 @@ CREATE TABLE IF NOT EXISTS person (
     city VARCHAR(255) NOT NULL,
     created DATETIME NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS rental (
+    id int primary key auto_increment,
+    book_id int,
+    person_id int,
+    rented_date DATETIME
+);
