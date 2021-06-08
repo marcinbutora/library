@@ -1,14 +1,10 @@
 package com.library.webapp.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
 @Table(name = "rental")
 public class Rental {
     @Id
@@ -30,5 +26,50 @@ public class Rental {
     }
 
     public Rental() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public LocalDateTime getRentedDate() {
+        return rentedDate;
+    }
+
+    public void setRentedDate(LocalDateTime rentedDate) {
+        this.rentedDate = rentedDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rental rental = (Rental) o;
+        return id == rental.id && Objects.equals(book, rental.book) && Objects.equals(person, rental.person) && Objects.equals(rentedDate, rental.rentedDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, book, person, rentedDate);
     }
 }

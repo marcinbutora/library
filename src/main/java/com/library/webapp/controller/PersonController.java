@@ -12,12 +12,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@AllArgsConstructor
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api")
 public class PersonController {
     private PersonService personService;
 
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
 
     @GetMapping(value = "/person/list")
     public List<Person> getAllPersons() {
@@ -25,12 +27,12 @@ public class PersonController {
     }
 
     @GetMapping(value = "/person/list/bylastname/{lastname}")
-    public List<Person> getPersonByLastname(@PathVariable("lastname") String lastname) {
+    public List<Person> getPersonByLastname(@PathVariable String lastname) {
         return personService.findByLastname(lastname);
     }
 
     @GetMapping(value = "/person/byid/{id}")
-    public Optional<Person> getPersonById(@PathVariable("id") Long id) {
+    public Optional<Person> getPersonById(@PathVariable Long id) {
         return personService.findById(id);
     }
 
@@ -41,7 +43,7 @@ public class PersonController {
     }
 
     @PutMapping(value = "/person/update/{id}")
-    public Person updatePerson(@RequestBody Person person, @PathVariable("id") Long id) {
+    public Person updatePerson(@RequestBody Person person, @PathVariable Long id) {
         return personService.findById(id).map(p -> {
             p.setFirstname(person.getFirstname());
             p.setLastname(person.getLastname());
@@ -50,7 +52,7 @@ public class PersonController {
         }).orElseThrow(() -> new ResourceNotFoundException("Person not found"));
     }
     @DeleteMapping(value = "/person/delete/{id}")
-    public ResponseEntity<?> deletePerson(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deletePerson(@PathVariable Long id) {
         return personService.findById(id).map(p -> {
             personService.delete(p);
             return ResponseEntity.ok().build();
