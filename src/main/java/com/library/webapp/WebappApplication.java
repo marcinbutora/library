@@ -6,6 +6,7 @@ import com.library.webapp.model.Rental;
 import com.library.webapp.repository.BookRepository;
 import com.library.webapp.repository.PersonRepository;
 import com.library.webapp.repository.RentalRepository;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,20 +32,25 @@ public class WebappApplication implements CommandLineRunner {
 	}
 
 	public void run(String... args) throws Exception {
-		Book book1 = new Book("Duchy", "Książka o duchach", "1234-5678");
-		Book book2 = new Book("Kosmici", "Książka o kosmitach", "2345-6789");
-		bookRepository.saveAll(List.of(book1, book2));
+		Book duchy = new Book("Duchy", "Książka o duchach", "1234-5678");
+		Book kosmici = new Book("Kosmici", "Książka o kosmitach", "2345-6789");
+		Book titanic = new Book("Titanic", "O statku","125383838");
+		bookRepository.saveAll(List.of(duchy, kosmici, titanic));
 
 		Person person1 = new Person("Stanisław", "Kowalski", "Międzyrzecze Górne", LocalDateTime.of(2021,10,21,10,20,00));
 		Person person2 = new Person("Aleksandra", "Nowicka", "Zalesie", LocalDateTime.of(2021,10,22,15,22,45));
 		Person ania = new Person("Anna", "Butora", "Twardorzeczka", LocalDateTime.of(2021,6,9,12,15,22));
-		personRepository.saveAll(List.of(person1, person2, ania));
+		Person Zuzia = new Person("Zuzanna", "Butora", "Żywiec", LocalDateTime.of(2016,1,6,21,30,00));
+		personRepository.saveAll(List.of(person1, person2, ania, Zuzia));
 
-		Rental rental1 = new Rental(book1, person1, LocalDateTime.now());
-		Rental rental2 = new Rental(book2, person2, LocalDateTime.now());
-		Rental rental3 = new Rental(book1, person2, LocalDateTime.now());
-		Rental rentalania = new Rental(book1, ania, LocalDateTime.now());
-		rentalRepository.saveAll(List.of(rental1, rental2, rental3, rentalania));
+		Rental rental1 = new Rental(duchy, person1, LocalDateTime.of(2021,8,16,19,22,00));
+		Rental rental2 = new Rental(kosmici, person2, LocalDateTime.of(2021,8,17,20,15,00));
+		Rental rental3 = new Rental(duchy, person2, LocalDateTime.now());
+		Rental rentalania = new Rental(duchy, ania, LocalDateTime.now());
+		Rental zuziakosmici = new Rental(kosmici, Zuzia, LocalDateTime.now());
+		Rental zuziaduchy = new Rental(duchy, Zuzia, LocalDateTime.now());
+		Rental stanislawtitanic = new Rental(titanic, person1, LocalDateTime.now());
+		rentalRepository.saveAll(List.of(rental1, rental2, rental3, rentalania, zuziakosmici, zuziaduchy, stanislawtitanic));
 	}
 
 
