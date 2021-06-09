@@ -29,4 +29,9 @@ public class RentalController {
     public List<Rental> getAllRentalsForPersonId(@PathVariable Long id) {
         return rentalService.findAllByPersonId(id);
     }
+
+    @GetMapping("/rentals/book/{id}")
+    public List<Rental> getAllRentalsByBookId(@PathVariable Long id) {
+        return rentalService.findAllByBookId(id);
+    }
 }

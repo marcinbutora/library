@@ -13,4 +13,5 @@ import java.util.List;
 @Repository
 public interface RentalRepository extends JpaRepository<Rental, Long> {
     List<Rental> findRentalByPersonId(Long id);
+    List<Rental> findRentalByBookId(Long id);
 }
