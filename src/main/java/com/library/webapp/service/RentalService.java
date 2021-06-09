@@ -26,4 +26,9 @@ public class RentalService {
         log.info("Finding all rentals");
         return rentalRepository.findAll();
     }
+
+    public List<Rental> findAllByPersonId(Long id) {
+        log.info("Finding all rentals by person id");
+        return rentalRepository.findRentalByPersonId(id);
+    }
 }

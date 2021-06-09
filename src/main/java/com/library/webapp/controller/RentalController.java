@@ -25,4 +25,8 @@ public class RentalController {
         return rentalService.findAllRentals();
     }
 
+    @GetMapping("/rentals/person/{id}")
+    public List<Rental> getAllRentalsForPersonId(@PathVariable Long id) {
+        return rentalService.findAllByPersonId(id);
+    }
 }
