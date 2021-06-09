@@ -34,4 +34,9 @@ public class RentalController {
     public List<Rental> getAllRentalsByBookId(@PathVariable Long id) {
         return rentalService.findAllByBookId(id);
     }
+
+    @GetMapping("/rentals/count/person/{id}")
+    public Long count(@PathVariable Long id) {
+        return rentalService.countRentalsOfPerson(id);
+    }
 }

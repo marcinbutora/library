@@ -34,4 +34,9 @@ public class RentalService {
         log.info("Finding all rentals by book id");
         return rentalRepository.findRentalByBookId(id);
     }
+
+    public Long countRentalsOfPerson(Long id) {
+        log.info("Counting records of person");
+        return rentalRepository.countRentalByPersonId(id);
+    }
 }

@@ -37,12 +37,14 @@ public class WebappApplication implements CommandLineRunner {
 
 		Person person1 = new Person("Stanisław", "Kowalski", "Międzyrzecze Górne", LocalDateTime.of(2021,10,21,10,20,00));
 		Person person2 = new Person("Aleksandra", "Nowicka", "Zalesie", LocalDateTime.of(2021,10,22,15,22,45));
-		personRepository.saveAll(List.of(person1, person2));
+		Person ania = new Person("Anna", "Butora", "Twardorzeczka", LocalDateTime.of(2021,6,9,12,15,22));
+		personRepository.saveAll(List.of(person1, person2, ania));
 
 		Rental rental1 = new Rental(book1, person1, LocalDateTime.now());
 		Rental rental2 = new Rental(book2, person2, LocalDateTime.now());
 		Rental rental3 = new Rental(book1, person2, LocalDateTime.now());
-		rentalRepository.saveAll(List.of(rental1, rental2, rental3));
+		Rental rentalania = new Rental(book1, ania, LocalDateTime.now());
+		rentalRepository.saveAll(List.of(rental1, rental2, rental3, rentalania));
 	}
 
 
