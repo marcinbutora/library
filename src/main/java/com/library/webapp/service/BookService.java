@@ -2,7 +2,6 @@ package com.library.webapp.service;
 
 
 import com.library.webapp.model.Book;
-import com.library.webapp.model.Person;
 import com.library.webapp.repository.BookRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

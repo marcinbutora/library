@@ -6,7 +6,6 @@ import com.library.webapp.model.Rental;
 import com.library.webapp.repository.BookRepository;
 import com.library.webapp.repository.PersonRepository;
 import com.library.webapp.repository.RentalRepository;
-import com.library.webapp.service.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
