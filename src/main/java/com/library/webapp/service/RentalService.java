@@ -25,6 +25,11 @@ public class RentalService {
         return rentalRepository.findAll();
     }
 
+    public Rental saveNewRental(Rental rental) {
+        log.info("Saving new rental");
+        return rentalRepository.save(rental);
+    }
+
     public List<Rental> findAllByPersonId(Long id) {
         log.info("Finding all rentals by person id");
         return rentalRepository.findRentalByPersonId(id);
