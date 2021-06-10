@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS person (
 
 CREATE TABLE IF NOT EXISTS rental (
     id int primary key auto_increment,
-    book_id int,
-    person_id int,
-    rented_date DATETIME
+    book_id int NOT NULL,
+    person_id int NOT NULL,
+    rented_date DATETIME NOT NULL
 );
