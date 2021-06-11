@@ -1,18 +1,16 @@
 package com.library.webapp.controller;
 
-import com.library.webapp.model.Person;
 import com.library.webapp.model.Rental;
 import com.library.webapp.service.RentalService;
-import lombok.AllArgsConstructor;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api")
 public class RentalController {
 
@@ -42,9 +40,9 @@ public class RentalController {
         return rentalService.countRentalsOfPerson(id);
     }
 
-    @PostMapping(value = "/rental/add")
-    public ResponseEntity<?> saveRental(@RequestBody Rental rental) {
-        rentalService.saveNewRental(rental);
+    @PostMapping(value = "/rental/{personId}/{bookId}")
+    public ResponseEntity<?> saveRental(@PathVariable Long bookId, @PathVariable Long personId) {
+        rentalService.saveNewRental(bookId, personId, LocalDateTime.now());
         return new ResponseEntity("Saved new rental", HttpStatus.OK);
     }
 }
