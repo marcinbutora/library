@@ -27,7 +27,7 @@ class BookRepositoryTest {
         List<Book> savedBookToDatabase = bookRepository.saveAll(List.of(bookOne, bookTwo));
 
         // then
-        assertThat(savedBookToDatabase).isEqualTo(List.of(bookOne,bookTwo));
+        assertThat(savedBookToDatabase).isEqualTo(List.of(bookOne, bookTwo));
     }
 
 }

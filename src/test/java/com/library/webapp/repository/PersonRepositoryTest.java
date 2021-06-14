@@ -21,13 +21,13 @@ class PersonRepositoryTest {
     @Test
     public void shouldReturnListOfSavedPersonsToDB() {
         // given
-        Person personToSaveOne = new Person("Janina", "Kowalska", "Bielsko-Biała", LocalDateTime.of(2021,10,21,22,22,00));
-        Person personToSaveTwo = new Person("Jan", "Kowalski", "Bielsko-Biała", LocalDateTime.of(2021,10,22,12,44,10));
+        Person personToSaveOne = new Person("Janina", "Kowalska", "Bielsko-Biała", LocalDateTime.of(2021, 10, 21, 22, 22, 00));
+        Person personToSaveTwo = new Person("Jan", "Kowalski", "Bielsko-Biała", LocalDateTime.of(2021, 10, 22, 12, 44, 10));
 
         // when
         List<Person> savedPersonsToDB = personRepository.saveAll(List.of(personToSaveOne, personToSaveTwo));
 
         // then
-        assertThat(savedPersonsToDB).isEqualTo(List.of(personToSaveOne,personToSaveTwo));
+        assertThat(savedPersonsToDB).isEqualTo(List.of(personToSaveOne, personToSaveTwo));
     }
 }

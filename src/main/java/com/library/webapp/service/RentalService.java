@@ -34,7 +34,7 @@ public class RentalService {
     public boolean saveNewRental(Long bookId, Long personId, LocalDateTime rentedDate) {
         Optional<Person> foundedPerson = personRepository.findById(personId);
         Optional<Book> foundedBook = bookRepository.findById(bookId);
-        if(foundedPerson.isPresent() && foundedBook.isPresent()) {
+        if (foundedPerson.isPresent() && foundedBook.isPresent()) {
             rentalRepository.save(new Rental(foundedBook.get(), foundedPerson.get(), rentedDate));
             return true;
         }

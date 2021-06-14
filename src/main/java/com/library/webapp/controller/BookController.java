@@ -3,7 +3,6 @@ package com.library.webapp.controller;
 import com.library.webapp.exception.ResourceNotFoundException;
 import com.library.webapp.model.Book;
 import com.library.webapp.service.BookService;
-import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
