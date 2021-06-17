@@ -8,7 +8,7 @@ import java.util.Objects;
 @Table(name = "rental")
 public class Rental {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
     @JoinColumn(name = "book_id")

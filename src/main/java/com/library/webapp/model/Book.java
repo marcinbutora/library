@@ -13,24 +13,35 @@ public class Book {
     private String title;
     private String description;
     private String isbn;
+    private String bookcover;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<Rental> rentalSet = new ArrayList<>();
 
-    public Book(Long id, String title, String description, String isbn) {
+    public Book(Long id, String title, String description, String isbn, String bookCover) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.isbn = isbn;
+        this.bookcover = bookCover;
     }
 
-    public Book(String title, String description, String isbn) {
+    public Book(String title, String description, String isbn, String bookCover) {
         this.title = title;
         this.description = description;
         this.isbn = isbn;
+        this.bookcover = bookCover;
     }
 
     public Book() {
+    }
+
+    public String getBookcover() {
+        return bookcover;
+    }
+
+    public void setBookcover(String bookcover) {
+        this.bookcover = bookcover;
     }
 
     public Long getId() {

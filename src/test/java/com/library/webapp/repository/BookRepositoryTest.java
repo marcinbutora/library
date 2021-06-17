@@ -20,8 +20,8 @@ class BookRepositoryTest {
     @Test
     public void shouldReturnListOfSavedBooks() {
         // given
-        Book bookOne = new Book(1L, "test", "test", "test");
-        Book bookTwo = new Book(2L, "test", "test", "test");
+        Book bookOne = new Book(1L, "test", "test", "test", "test url");
+        Book bookTwo = new Book(2L, "test", "test", "test", "test url");
 
         // when
         List<Book> savedBookToDatabase = bookRepository.saveAll(List.of(bookOne, bookTwo));
