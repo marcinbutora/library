@@ -33,7 +33,7 @@ public class BookService {
     }
 
     public Book save(Book book) {
-        log.warn("Saving new book");
+        log.info("Saving new book");
         return bookRepository.save(book);
     }
 
