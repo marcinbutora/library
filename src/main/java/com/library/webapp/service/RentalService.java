@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.TooManyListenersException;
 
 @Service
 @Slf4j
@@ -31,15 +32,19 @@ public class RentalService {
         return rentalRepository.findAll();
     }
 
-    public boolean saveNewRental(Long bookId, Long personId, LocalDateTime rentedDate) {
+    public boolean saveNewRental(Long bookId, Long personId, LocalDateTime rentedDate) throws TooManyListenersException {
         log.info("Saving new rental");
         Optional<Person> foundedPerson = personRepository.findById(personId);
         Optional<Book> foundedBook = bookRepository.findById(bookId);
-        if (foundedPerson.isPresent() && foundedBook.isPresent()) {
-            rentalRepository.save(new Rental(foundedBook.get(), foundedPerson.get(), rentedDate));
-            return true;
+        if (rentalRepository.countRentalByPersonId(personId) == 4) {
+            throw new TooManyListenersException("Reader have maximum number of rentals!");
+        } else {
+            if (foundedPerson.isPresent() && foundedBook.isPresent()) {
+                rentalRepository.save(new Rental(foundedBook.get(), foundedPerson.get(), rentedDate));
+                return true;
+            }
+            return false;
         }
-        return false;
     }
 
     public List<Rental> findAllByPersonId(Long id) {

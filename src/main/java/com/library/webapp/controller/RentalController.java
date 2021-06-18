@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.TooManyListenersException;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -41,7 +42,7 @@ public class RentalController {
     }
 
     @PostMapping(value = "/rental/{personId}/{bookId}")
-    public ResponseEntity<?> saveRental(@PathVariable Long bookId, @PathVariable Long personId) {
+    public ResponseEntity<?> saveRental(@PathVariable Long bookId, @PathVariable Long personId) throws TooManyListenersException {
         rentalService.saveNewRental(bookId, personId, LocalDateTime.now());
         return new ResponseEntity("Saved new rental", HttpStatus.OK);
     }
