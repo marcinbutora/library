@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,6 +29,31 @@ class BookRepositoryTest {
 
         // then
         assertThat(savedBookToDatabase).isEqualTo(List.of(bookOne, bookTwo));
+    }
+
+    @Test
+    public void shouldFindBookByTitleLocal() {
+        // given
+        Book bookToFind = new Book("test", "test", "test", "test desc");
+
+        // when
+        List<Book> foundedBook = bookRepository.findByTitle("test");
+
+        // then
+        assertThat(foundedBook).isEqualTo(bookToFind);
+    }
+
+    @Test
+    public void shouldFindBookByTitleDb() {
+        // given
+        Book bookToFind = new Book("test", "test", "test", "test");
+
+        // when
+        Book savedBook = bookRepository.save(bookToFind);
+        List<Book> foundedBook = bookRepository.findByTitle("test");
+
+        // then
+        assertThat(savedBook).isEqualTo(foundedBook);
     }
 
 }
