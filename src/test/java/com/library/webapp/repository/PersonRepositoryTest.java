@@ -1,6 +1,7 @@
 package com.library.webapp.repository;
 
-import com.library.webapp.model.Person;
+import com.library.webapp.person.model.Person;
+import com.library.webapp.person.repository.PersonRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

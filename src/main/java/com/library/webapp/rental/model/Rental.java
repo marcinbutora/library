@@ -1,4 +1,7 @@
-package com.library.webapp.model;
+package com.library.webapp.rental.model;
+
+import com.library.webapp.book.model.Book;
+import com.library.webapp.person.model.Person;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

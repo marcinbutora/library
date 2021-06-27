@@ -1,13 +1,13 @@
 package com.library.webapp.repository;
 
-import com.library.webapp.model.Book;
+import com.library.webapp.book.model.Book;
+import com.library.webapp.book.repository.BookRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

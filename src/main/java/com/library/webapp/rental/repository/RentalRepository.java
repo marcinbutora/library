@@ -1,6 +1,6 @@
-package com.library.webapp.repository;
+package com.library.webapp.rental.repository;
 
-import com.library.webapp.model.Rental;
+import com.library.webapp.rental.model.Rental;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,11 +1,11 @@
-package com.library.webapp.service;
+package com.library.webapp.rental.service;
 
-import com.library.webapp.model.Book;
-import com.library.webapp.model.Person;
-import com.library.webapp.model.Rental;
-import com.library.webapp.repository.BookRepository;
-import com.library.webapp.repository.PersonRepository;
-import com.library.webapp.repository.RentalRepository;
+import com.library.webapp.book.model.Book;
+import com.library.webapp.person.model.Person;
+import com.library.webapp.rental.model.Rental;
+import com.library.webapp.book.repository.BookRepository;
+import com.library.webapp.person.repository.PersonRepository;
+import com.library.webapp.rental.repository.RentalRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

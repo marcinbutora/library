@@ -1,17 +1,15 @@
 package com.library.webapp.service;
 
-import com.library.webapp.exception.TooManyRentalsException;
-import com.library.webapp.model.Book;
-import com.library.webapp.model.Person;
-import com.library.webapp.model.Rental;
-import com.library.webapp.repository.RentalRepository;
-import org.junit.jupiter.api.Assertions;
+import com.library.webapp.book.model.Book;
+import com.library.webapp.person.model.Person;
+import com.library.webapp.rental.model.Rental;
+import com.library.webapp.rental.repository.RentalRepository;
+import com.library.webapp.rental.service.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @SpringBootTest
 @Transactional

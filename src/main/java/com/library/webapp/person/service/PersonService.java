@@ -1,7 +1,7 @@
-package com.library.webapp.service;
+package com.library.webapp.person.service;
 
-import com.library.webapp.model.Person;
-import com.library.webapp.repository.PersonRepository;
+import com.library.webapp.person.model.Person;
+import com.library.webapp.person.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

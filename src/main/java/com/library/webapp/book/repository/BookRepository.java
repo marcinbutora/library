@@ -1,6 +1,6 @@
-package com.library.webapp.repository;
+package com.library.webapp.book.repository;
 
-import com.library.webapp.model.Book;
+import com.library.webapp.book.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

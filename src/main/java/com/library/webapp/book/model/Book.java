@@ -1,4 +1,6 @@
-package com.library.webapp.model;
+package com.library.webapp.book.model;
+
+import com.library.webapp.rental.model.Rental;
 
 import javax.persistence.*;
 import java.util.ArrayList;

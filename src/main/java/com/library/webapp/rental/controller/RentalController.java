@@ -1,7 +1,7 @@
-package com.library.webapp.controller;
+package com.library.webapp.rental.controller;
 
-import com.library.webapp.model.Rental;
-import com.library.webapp.service.RentalService;
+import com.library.webapp.rental.model.Rental;
+import com.library.webapp.rental.service.RentalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

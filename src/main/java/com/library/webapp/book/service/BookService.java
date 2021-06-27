@@ -1,8 +1,8 @@
-package com.library.webapp.service;
+package com.library.webapp.book.service;
 
 
-import com.library.webapp.model.Book;
-import com.library.webapp.repository.BookRepository;
+import com.library.webapp.book.model.Book;
+import com.library.webapp.book.repository.BookRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

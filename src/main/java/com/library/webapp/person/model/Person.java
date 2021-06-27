@@ -1,5 +1,6 @@
-package com.library.webapp.model;
+package com.library.webapp.person.model;
 
+import com.library.webapp.rental.model.Rental;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

@@ -1,8 +1,8 @@
-package com.library.webapp.controller;
+package com.library.webapp.person.controller;
 
 import com.library.webapp.exception.ResourceNotFoundException;
-import com.library.webapp.model.Person;
-import com.library.webapp.service.PersonService;
+import com.library.webapp.person.model.Person;
+import com.library.webapp.person.service.PersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
