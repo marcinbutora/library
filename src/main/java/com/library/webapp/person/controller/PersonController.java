@@ -25,7 +25,7 @@ public class PersonController {
         this.personConverter = personConverter;
     }
 
-    @GetMapping(value = "/list")
+    @GetMapping()
     public List<PersonDTO> getAllPersons() {
         List<Person> findAll = personService.findAllPersons();
         return personConverter.entityToDto(findAll);
@@ -42,7 +42,7 @@ public class PersonController {
         return personService.findById(id).orElseThrow(PersonNotFoundException::new);
     }
 
-    @PostMapping(value = "/add")
+    @PostMapping()
     public ResponseEntity<?> savePerson(@RequestBody Person person) {
         personService.save(person);
         return new ResponseEntity("Person saved successfully", HttpStatus.OK);
