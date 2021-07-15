@@ -1,9 +1,6 @@
 package com.library.webapp.person.controller;
 
-import com.library.webapp.exception.PersonNotFoundException;
 import com.library.webapp.exception.ResourceNotFoundException;
-import com.library.webapp.person.converter.PersonConverter;
-import com.library.webapp.person.dto.PersonDTO;
 import com.library.webapp.person.model.Person;
 import com.library.webapp.person.service.PersonService;
 import org.springframework.http.HttpStatus;
@@ -15,40 +12,36 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/api/person")
+@RequestMapping("/api")
 public class PersonController {
     private PersonService personService;
-    private PersonConverter personConverter;
 
-    public PersonController(PersonService personService, PersonConverter personConverter) {
+    public PersonController(PersonService personService) {
         this.personService = personService;
-        this.personConverter = personConverter;
     }
 
-    @GetMapping()
-    public List<PersonDTO> getAllPersons() {
-        List<Person> findAll = personService.findAllPersons();
-        return personConverter.entityToDto(findAll);
+    @GetMapping(value = "/person/list")
+    public List<Person> getAllPersons() {
+        return personService.findAllPersons();
     }
 
-    @GetMapping(value = "/bylastname/{lastname}")
-    public List<PersonDTO> getPersonByLastname(@PathVariable String lastname) {
-        List<Person> getPersonsByLastname = personService.findByLastname(lastname);
-        return personConverter.entityToDto(getPersonsByLastname);
+    @GetMapping(value = "/person/list/bylastname/{lastname}")
+    public List<Person> getPersonByLastname(@PathVariable String lastname) {
+        return personService.findByLastname(lastname);
     }
 
-    @GetMapping(value = "/{id}")
-    public Person getPersonById(@PathVariable Long id) {
-        return personService.findById(id).orElseThrow(PersonNotFoundException::new);
+    @GetMapping(value = "/person/byid/{id}")
+    public Optional<Person> getPersonById(@PathVariable Long id) {
+        return personService.findById(id);
     }
 
-    @PostMapping()
+    @PostMapping(value = "/person/add")
     public ResponseEntity<?> savePerson(@RequestBody Person person) {
         personService.save(person);
         return new ResponseEntity("Person saved successfully", HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/person/update/{id}")
     public Person updatePerson(@RequestBody Person person, @PathVariable Long id) {
         return personService.findById(id).map(p -> {
             p.setFirstname(person.getFirstname());
@@ -57,7 +50,7 @@ public class PersonController {
             return personService.save(p);
         }).orElseThrow(() -> new ResourceNotFoundException("Person not found"));
     }
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/person/delete/{id}")
     public ResponseEntity<?> deletePerson(@PathVariable Long id) {
         return personService.findById(id).map(p -> {
             personService.delete(p);

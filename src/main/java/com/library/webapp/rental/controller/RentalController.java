@@ -12,7 +12,7 @@ import java.util.TooManyListenersException;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/api")
+@RequestMapping("/api/rentals")
 public class RentalController {
 
     private RentalService rentalService;
@@ -21,27 +21,27 @@ public class RentalController {
         this.rentalService = rentalService;
     }
 
-    @GetMapping("/rental/list")
+    @GetMapping("/list")
     public List<Rental> getAllRentals() {
         return rentalService.findAllRentals();
     }
 
-    @GetMapping("/rentals/person/{id}")
+    @GetMapping("/reader/{id}")
     public List<Rental> getAllRentalsForPersonId(@PathVariable Long id) {
         return rentalService.findAllByPersonId(id);
     }
 
-    @GetMapping("/rentals/book/{id}")
+    @GetMapping("/book/{id}")
     public List<Rental> getAllRentalsByBookId(@PathVariable Long id) {
         return rentalService.findAllByBookId(id);
     }
 
-    @GetMapping("/rentals/count/person/{id}")
+    @GetMapping("/count/reader/{id}")
     public Long count(@PathVariable Long id) {
         return rentalService.countRentalsOfPerson(id);
     }
 
-    @PostMapping(value = "/rental/{personId}/{bookId}")
+    @PostMapping(value = "/{personId}/{bookId}")
     public ResponseEntity<?> saveRental(@PathVariable Long bookId, @PathVariable Long personId) throws TooManyListenersException {
         rentalService.saveNewRental(bookId, personId, LocalDateTime.now());
         return new ResponseEntity("Saved new rental", HttpStatus.OK);
