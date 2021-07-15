@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/api")
+@RequestMapping("/api/person")
 public class PersonController {
     private PersonService personService;
 
@@ -20,28 +20,28 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping(value = "/person/list")
+    @GetMapping
     public List<Person> getAllPersons() {
         return personService.findAllPersons();
     }
 
-    @GetMapping(value = "/person/list/bylastname/{lastname}")
+    @GetMapping(value = "/bylastname/{lastname}")
     public List<Person> getPersonByLastname(@PathVariable String lastname) {
         return personService.findByLastname(lastname);
     }
 
-    @GetMapping(value = "/person/byid/{id}")
+    @GetMapping(value = "/{id}")
     public Optional<Person> getPersonById(@PathVariable Long id) {
         return personService.findById(id);
     }
 
-    @PostMapping(value = "/person/add")
+    @PostMapping
     public ResponseEntity<?> savePerson(@RequestBody Person person) {
         personService.save(person);
         return new ResponseEntity("Person saved successfully", HttpStatus.OK);
     }
 
-    @PutMapping(value = "/person/update/{id}")
+    @PutMapping(value = "/{id}")
     public Person updatePerson(@RequestBody Person person, @PathVariable Long id) {
         return personService.findById(id).map(p -> {
             p.setFirstname(person.getFirstname());
@@ -50,7 +50,7 @@ public class PersonController {
             return personService.save(p);
         }).orElseThrow(() -> new ResourceNotFoundException("Person not found"));
     }
-    @DeleteMapping(value = "/person/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deletePerson(@PathVariable Long id) {
         return personService.findById(id).map(p -> {
             personService.delete(p);

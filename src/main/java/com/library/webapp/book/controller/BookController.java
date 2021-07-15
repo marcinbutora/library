@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/api")
+@RequestMapping("/api/book")
 public class BookController {
 
     private BookService bookService;
@@ -21,28 +21,28 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping(value = "/book/list")
+    @GetMapping
     public List<Book> getAllBooks() {
         return bookService.findAllBooks();
     }
 
-    @GetMapping(value = "/book/list/bytitle/{title}")
+    @GetMapping(value = "/bytitle/{title}")
     public List<Book> getBookByName(@PathVariable("title") String title) {
         return bookService.findByTitle(title);
     }
 
-    @GetMapping(value = "/book/byid/{id}")
+    @GetMapping(value = "/{id}")
     public Optional<Book> getBookById(@PathVariable("id") Long id) {
         return bookService.findById(id);
     }
 
-    @PostMapping(value = "/book/add")
+    @PostMapping
     public ResponseEntity<?> saveBook(@RequestBody Book book) {
         bookService.save(book);
         return new ResponseEntity("Book saved successfully", HttpStatus.OK);
     }
 
-    @PutMapping(value = "/book/update/{id}")
+    @PutMapping(value = "/{id}")
     public Book updateBook(@RequestBody Book book, @PathVariable("id") Long id) {
         return bookService.findById(id).map(b -> {
             b.setTitle(book.getTitle());
@@ -52,7 +52,7 @@ public class BookController {
         }).orElseThrow(() -> new ResourceNotFoundException("Book not found"));
     }
 
-    @DeleteMapping(value = "/book/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable("id") Long id) {
         return bookService.findById(id).map(b -> {
             bookService.delete(b);
