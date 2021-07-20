@@ -1,7 +1,6 @@
-package com.library.webapp.person.service;
+package com.library.webapp.person;
 
-import com.library.webapp.person.model.Person;
-import com.library.webapp.person.repository.PersonRepository;
+import com.library.webapp.rental.RentalRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +11,11 @@ import java.util.Optional;
 @Slf4j
 public class PersonService {
     private PersonRepository personRepository;
+    private RentalRepository rentalRepository;
 
-    public PersonService(PersonRepository personRepository) {
+    public PersonService(PersonRepository personRepository, RentalRepository rentalRepository) {
         this.personRepository = personRepository;
+        this.rentalRepository = rentalRepository;
     }
 
     public List<Person> findAllPersons() {
@@ -39,5 +40,10 @@ public class PersonService {
     public void delete(Person person) {
         log.info("Deleting person");
         personRepository.delete(person);
+    }
+
+    public Long countRentalsForPerson(Long id) {
+        log.info("Counting rentals for person");
+        return rentalRepository.countRentalByPersonId(id);
     }
 }

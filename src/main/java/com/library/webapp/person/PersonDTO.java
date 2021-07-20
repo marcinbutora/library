@@ -1,4 +1,4 @@
-package com.library.webapp.person.dto;
+package com.library.webapp.person;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
 package com.library.webapp.person.repository;
 
-import com.library.webapp.person.dto.PersonDTO;
-import com.library.webapp.person.model.Person;
+import com.library.webapp.person.Person;
+import com.library.webapp.person.PersonRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

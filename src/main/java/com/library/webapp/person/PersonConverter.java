@@ -1,7 +1,5 @@
-package com.library.webapp.person.converter;
+package com.library.webapp.person;
 
-import com.library.webapp.person.dto.PersonDTO;
-import com.library.webapp.person.model.Person;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

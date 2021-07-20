@@ -1,4 +1,4 @@
-package com.library.webapp.exception;
+package com.library.webapp.rental;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

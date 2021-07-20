@@ -1,4 +1,4 @@
-package com.library.webapp.exception;
+package com.library.webapp.person;
 
 public class PersonNotFoundException extends RuntimeException {
     public PersonNotFoundException() {
