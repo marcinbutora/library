@@ -1,6 +1,7 @@
 package com.library.webapp.exception;
 
 import com.library.webapp.person.PersonNotFoundException;
+import com.library.webapp.rental.RentalAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,5 +17,11 @@ public class ApiExceptionHandler {
     ResponseEntity<ApiException> handlePersonNotFoundException(PersonNotFoundException exception, WebRequest request) {
         ApiException apiException = new ApiException(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
                 return new ResponseEntity<>(apiException, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = {RentalAlreadyExistsException.class})
+    ResponseEntity<ApiException> handleRentalAlreadyExists(RentalAlreadyExistsException exception, WebRequest request) {
+        ApiException apiException = new ApiException(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
+                return new ResponseEntity<>(apiException, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

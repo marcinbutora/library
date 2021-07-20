@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -50,17 +49,18 @@ public class PersonController {
             p.setLastname(person.getLastname());
             p.setCity(person.getCity());
             return personService.save(p);
-        }).orElseThrow(() -> new PersonNotFoundException("Person not found with id: "+ id));
+        }).orElseThrow(() -> new PersonNotFoundException("Person not found!"));
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deletePerson(@PathVariable Long id) {
-        if (rentalService.countRentalsOfPerson(id) > 0) {
-            throw new RentalAlreadyExistsException("Cannot be deleted because reader has unreturned books!", HttpStatus.INTERNAL_SERVER_ERROR);
+        Long countRentalsByPersonId = rentalService.countRentalsOfPerson(id);
+        if (countRentalsByPersonId > 0) {
+            throw new RentalAlreadyExistsException("Cannot be deleted because reader has " + countRentalsByPersonId + " unreturned books!");
         }
         return personService.findById(id).map(p -> {
             personService.delete(p);
             return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new ResourceNotFoundException("Person not found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
     }
 }
