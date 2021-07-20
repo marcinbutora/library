@@ -33,8 +33,8 @@ public class PersonController {
     }
 
     @GetMapping(value = "/{id}")
-    public Optional<Person> getPersonById(@PathVariable Long id) {
-        return personService.findById(id);
+    public Person getPersonById(@PathVariable Long id) {
+        return personService.findById(id).orElseThrow(() -> new PersonNotFoundException("Reader not found with id: " + id));
     }
 
     @PostMapping
@@ -50,7 +50,7 @@ public class PersonController {
             p.setLastname(person.getLastname());
             p.setCity(person.getCity());
             return personService.save(p);
-        }).orElseThrow(() -> new ResourceNotFoundException("Person not found"));
+        }).orElseThrow(() -> new PersonNotFoundException("Person not found with id: "+ id));
     }
 
     @DeleteMapping(value = "/{id}")
