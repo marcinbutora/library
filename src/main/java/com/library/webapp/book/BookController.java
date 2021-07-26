@@ -18,19 +18,19 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> getAllBooks() {
+    public List<BookDTO> getAllBooks() {
         return bookService.findAllBooks();
     }
 
     @GetMapping(value = "/bytitle/{title}")
-    public List<Book> getBookByName(@PathVariable("title") String title) {
+    public List<BookDTO> getBookByName(@PathVariable("title") String title) {
         return bookService.findByTitle(title);
     }
 
     @GetMapping(value = "/{id}")
-//    public Optional<Book> getBookById(@PathVariable("id") Long id) {
-//        return bookService.findById(id);
-//    }
+    public BookDTO getBookById(@PathVariable("id") Long id) {
+        return bookService.findById(id);
+    }
 
     @PostMapping
     ResponseEntity<BookDTO> saveBook(@RequestBody BookDTO bookDTO) {
@@ -46,6 +46,13 @@ public class BookController {
 //            b.setIsbn(book.getIsbn());
 //            return bookService.save(b);
 //        }).orElseThrow(() -> new ResourceNotFoundException("Book not found"));
+//    }
+
+    // TODO: update
+
+
+//    public BookDTO update(@RequestBody Book book, @PathVariable("id") Long id) {
+//        return BookConverter.entityToDTO(book.getId());
 //    }
 
 //    @DeleteMapping(value = "/{id}")
