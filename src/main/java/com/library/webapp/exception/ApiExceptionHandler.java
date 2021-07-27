@@ -1,9 +1,11 @@
 package com.library.webapp.exception;
 
-import com.library.webapp.book.Book;
 import com.library.webapp.book.BookNotFoundException;
 import com.library.webapp.person.PersonNotFoundException;
+import com.library.webapp.rental.BookAlreadyRentedByPersonException;
 import com.library.webapp.rental.RentalAlreadyExistsException;
+import com.library.webapp.rental.SavedNewRentalException;
+import com.library.webapp.rental.TooManyRentalsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,8 +31,27 @@ public class ApiExceptionHandler {
 
 
     @ExceptionHandler(value = {RentalAlreadyExistsException.class})
-    ResponseEntity<ApiException> handleRentalAlreadyExists(RentalAlreadyExistsException exception, WebRequest request) {
+    ResponseEntity<ApiException> handleRentalAlreadyExists(RentalAlreadyExistsException exception,
+                                                           WebRequest request) {
         ApiException apiException = new ApiException(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
                 return new ResponseEntity<>(apiException, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = {TooManyRentalsException.class})
+    ResponseEntity<ApiException> handleTooManyRentals(TooManyRentalsException exception, WebRequest request) {
+        ApiException apiException = new ApiException(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(apiException, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = {SavedNewRentalException.class})
+    ResponseEntity<ApiException> handleTooManyRentals(SavedNewRentalException exception, WebRequest request) {
+        ApiException apiException = new ApiException(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(apiException, HttpStatus.CREATED);
+    }
+
+    @ExceptionHandler(value = {BookAlreadyRentedByPersonException.class})
+    ResponseEntity<ApiException> handleBookAlreadyRentedByPerson(BookAlreadyRentedByPersonException exception, WebRequest request) {
+        ApiException apiException = new ApiException(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(apiException, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

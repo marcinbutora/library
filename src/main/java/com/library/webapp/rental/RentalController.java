@@ -13,7 +13,7 @@ import java.util.TooManyListenersException;
 @RequestMapping("/api/rentals")
 public class RentalController {
 
-    private RentalService rentalService;
+    private final RentalService rentalService;
 
     public RentalController(RentalService rentalService) {
         this.rentalService = rentalService;
@@ -40,8 +40,8 @@ public class RentalController {
     }
 
     @PostMapping(value = "/{personId}/{bookId}")
-    public ResponseEntity<?> saveRental(@PathVariable Long bookId, @PathVariable Long personId) throws TooManyListenersException {
-        rentalService.saveNewRental(bookId, personId, LocalDateTime.now());
-        return new ResponseEntity("Saved new rental", HttpStatus.OK);
+    public ResponseEntity<?> saveRental(@PathVariable Long bookId,
+                                        @PathVariable Long personId) {
+        return rentalService.saveNewRental(bookId, personId, LocalDateTime.now());
     }
 }
