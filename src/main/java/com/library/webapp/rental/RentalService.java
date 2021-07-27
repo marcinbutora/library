@@ -44,10 +44,10 @@ public class RentalService {
             throw new BookNotFoundException(String.format("Book with this id not found: %d", bookId));
         }
         List<Rental> getAllRentals = rentalRepository.findAll();
-        List<Rental> filteredRentals = getAllRentals.stream()
+        List<Rental> foundedRentalByPersonAndBookId = getAllRentals.stream()
                 .filter(a -> a.getPerson().getId().equals(foundedPerson.get().getId()) && a.getBook().getId().equals(foundedBook.get().getId()))
                 .collect(Collectors.toList());
-        if (!filteredRentals.isEmpty()) {
+        if (!foundedRentalByPersonAndBookId.isEmpty()) {
             throw new BookAlreadyRentedByPersonException(String.format("Book was already rented by %s %s",
                     foundedPerson.get().getFirstname(), foundedPerson.get().getLastname()));
         }
