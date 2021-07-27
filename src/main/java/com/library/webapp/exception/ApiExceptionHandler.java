@@ -1,5 +1,7 @@
 package com.library.webapp.exception;
 
+import com.library.webapp.book.Book;
+import com.library.webapp.book.BookNotFoundException;
 import com.library.webapp.person.PersonNotFoundException;
 import com.library.webapp.rental.RentalAlreadyExistsException;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,13 @@ public class ApiExceptionHandler {
         ApiException apiException = new ApiException(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
                 return new ResponseEntity<>(apiException, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = {BookNotFoundException.class})
+    ResponseEntity<ApiException> handleBookNotFoundException(BookNotFoundException exception, WebRequest request) {
+        ApiException apiException = new ApiException(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(apiException, HttpStatus.NOT_FOUND);
+    }
+
 
     @ExceptionHandler(value = {RentalAlreadyExistsException.class})
     ResponseEntity<ApiException> handleRentalAlreadyExists(RentalAlreadyExistsException exception, WebRequest request) {

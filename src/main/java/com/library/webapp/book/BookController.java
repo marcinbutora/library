@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/api/book")
 public class BookController {
 
-    private BookService bookService;
+    private final BookService bookService;
 
     public BookController(BookService bookService) {
         this.bookService = bookService;
@@ -23,13 +23,13 @@ public class BookController {
     }
 
     @GetMapping(value = "/bytitle/{title}")
-    public List<BookDTO> getBookByName(@PathVariable("title") String title) {
+    public List<Book> getBookByName(@PathVariable("title") String title) {
         return bookService.findByTitle(title);
     }
 
     @GetMapping(value = "/{id}")
-    public BookDTO getBookById(@PathVariable("id") Long id) {
-        return bookService.findById(id);
+    public ResponseEntity<BookDTO> getById(@PathVariable("id") Long id) throws BookNotFoundException {
+        return ResponseEntity.ok(bookService.findById(id));
     }
 
     @PostMapping
