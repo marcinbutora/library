@@ -19,12 +19,13 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public List<BookDTO> findAllBooks() {
+    public List<Book> findAllBooks() {
         log.info("Getting all books");
-        return bookRepository.findAll()
-                .stream()
-                .map(BookConverter::entityToDTO)
-                .collect(Collectors.toList());
+        List<Book> foundedBooks = bookRepository.findAll();
+        if(foundedBooks.isEmpty()) {
+            throw new BookNotFoundException("Books not found!");
+        }
+        return foundedBooks;
     }
 
     public List<Book> findByTitle(String title) throws BookNotFoundException {
