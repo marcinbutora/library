@@ -13,8 +13,8 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/person")
 public class PersonController {
-    private PersonService personService;
-    private RentalService rentalService;
+    private final PersonService personService;
+    private final RentalService rentalService;
 
     public PersonController(PersonService personService, RentalService rentalService) {
         this.personService = personService;

@@ -35,14 +35,20 @@ public class RentalService {
 
     public ResponseEntity<Rental> saveNewRental(Long bookId, Long personId, LocalDateTime rentedDate) {
         log.info("Saving new rental");
+
+        // check if the person exists
         Optional<Person> foundedPerson = personRepository.findById(personId);
         if (foundedPerson.isEmpty()) {
             throw new PersonNotFoundException(String.format("Person with this id (%d) not found!", personId));
         }
+
+        // check if the book exists
         Optional<Book> foundedBook = bookRepository.findById(bookId);
         if (foundedBook.isEmpty()) {
             throw new BookNotFoundException(String.format("Book with this id not found: %d", bookId));
         }
+
+        // check if the person has already borrowed this book
         List<Rental> getAllRentals = rentalRepository.findAll();
         List<Rental> foundedRentalByPersonAndBookId = getAllRentals.stream()
                 .filter(a -> a.getPerson().getId().equals(foundedPerson.get().getId()) && a.getBook().getId().equals(foundedBook.get().getId()))
@@ -51,13 +57,28 @@ public class RentalService {
             throw new BookAlreadyRentedByPersonException(String.format("Book was already rented by %s %s",
                     foundedPerson.get().getFirstname(), foundedPerson.get().getLastname()));
         }
+
+        // check if the person is in arrears with returning a book for more than 30 days
+        List<Long> allExpiredRentals = rentalRepository.countHowManyDaysBookIsRented(personId);
+        Long countHowManyBooksAreNotReturned = rentalRepository.countAllExpiredRentals(personId);
+
+        for (Long allExpiredRental : allExpiredRentals) {
+            if (allExpiredRental > 30) {
+                throw new BookTooLongNotReturnException(String.format("Reader has %d not returned book over 30 days!",
+                        countHowManyBooksAreNotReturned));
+            }
+        }
+
+
+        // check if the person has already borrowed 4 books - if so, do not borrow another one
         if (rentalRepository.countRentalByPersonId(personId) == 4) {
             throw new TooManyRentalsException("Reader have maximum number of rentals!");
-        } else {
-            rentalRepository.save(new Rental(foundedBook.get(), foundedPerson.get(), rentedDate));
-            throw new SavedNewRentalException(String.format("Rental saved! %s %s rented a %s",
-                    foundedPerson.get().getFirstname(), foundedPerson.get().getLastname(), foundedBook.get().getTitle()));
         }
+
+        // final save, if everything above is ok
+        rentalRepository.save(new Rental(foundedBook.get(), foundedPerson.get(), rentedDate));
+        throw new SavedNewRentalException(String.format("Rental saved! %s %s rented a %s",
+                foundedPerson.get().getFirstname(), foundedPerson.get().getLastname(), foundedBook.get().getTitle()));
     }
 
     public List<Rental> findAllByPersonId(Long id) {
