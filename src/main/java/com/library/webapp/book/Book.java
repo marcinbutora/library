@@ -15,7 +15,7 @@ public class Book {
     private String title;
     private String description;
     private String isbn;
-    private String bookcover;
+    private String bookCover;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private final List<Rental> rentalSet = new ArrayList<>();
@@ -25,25 +25,25 @@ public class Book {
         this.title = title;
         this.description = description;
         this.isbn = isbn;
-        this.bookcover = bookCover;
+        this.bookCover = bookCover;
     }
 
     public Book(String title, String description, String isbn, String bookCover) {
         this.title = title;
         this.description = description;
         this.isbn = isbn;
-        this.bookcover = bookCover;
+        this.bookCover = bookCover;
     }
 
     public Book() {
     }
 
-    public String getBookcover() {
-        return bookcover;
+    public String getBookCover() {
+        return bookCover;
     }
 
-    public void setBookcover(String bookcover) {
-        this.bookcover = bookcover;
+    public void setBookCover(String bookCover) {
+        this.bookCover = bookCover;
     }
 
     public Long getId() {

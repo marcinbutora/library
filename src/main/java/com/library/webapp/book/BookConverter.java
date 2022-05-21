@@ -6,7 +6,7 @@ public class BookConverter {
         bookDTO.setTitle(book.getTitle());
         bookDTO.setDescription(book.getDescription());
         bookDTO.setIsbn(book.getIsbn());
-        bookDTO.setBookcover(book.getBookcover());
+        bookDTO.setBookcover(book.getBookCover());
         return bookDTO;
     }
 
@@ -15,7 +15,7 @@ public class BookConverter {
         book.setTitle(bookDTO.getTitle());
         book.setDescription(bookDTO.getDescription());
         book.setIsbn(bookDTO.getIsbn());
-        book.setBookcover(bookDTO.getBookcover());
+        book.setBookCover(bookDTO.getBookcover());
         return book;
     }
 
