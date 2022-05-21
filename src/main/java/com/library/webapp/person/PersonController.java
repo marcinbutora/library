@@ -39,7 +39,7 @@ public class PersonController {
     @PostMapping
     public ResponseEntity<?> savePerson(@RequestBody Person person) {
         personService.save(person);
-        return new ResponseEntity("Person saved successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Person saved successfully", HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")

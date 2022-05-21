@@ -22,7 +22,7 @@ public class Person {
     private LocalDateTime created;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private List<Rental> rentalSet = new ArrayList<>();
+    private final List<Rental> rentalSet = new ArrayList<>();
 
     public Person(Long id, String firstname, String lastname, String city, LocalDateTime created) {
         this.id = id;

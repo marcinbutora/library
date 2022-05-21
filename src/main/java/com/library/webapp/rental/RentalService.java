@@ -69,7 +69,6 @@ public class RentalService {
             }
         }
 
-
         // check if the person has already borrowed 4 books - if so, do not borrow another one
         if (rentalRepository.countRentalByPersonId(personId) == 4) {
             throw new TooManyRentalsException("Reader have maximum number of rentals!");

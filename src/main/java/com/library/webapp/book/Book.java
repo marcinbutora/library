@@ -18,7 +18,7 @@ public class Book {
     private String bookcover;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    private List<Rental> rentalSet = new ArrayList<>();
+    private final List<Rental> rentalSet = new ArrayList<>();
 
     public Book(Long id, String title, String description, String isbn, String bookCover) {
         this.id = id;
