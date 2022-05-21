@@ -6,7 +6,9 @@ import com.library.webapp.book.BookRepository;
 import com.library.webapp.person.Person;
 import com.library.webapp.person.PersonNotFoundException;
 import com.library.webapp.person.PersonRepository;
+import com.mysql.cj.x.protobuf.Mysqlx;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +35,7 @@ public class RentalService {
         return rentalRepository.findAll();
     }
 
-    public ResponseEntity<Rental> saveNewRental(Long bookId, Long personId, LocalDateTime rentedDate) {
+    public Rental saveNewRental(Long bookId, Long personId, LocalDateTime rentedDate) {
         log.info("Saving new rental");
 
         // check if the person exists
@@ -75,9 +77,7 @@ public class RentalService {
         }
 
         // final save, if everything above is ok
-        rentalRepository.save(new Rental(foundedBook.get(), foundedPerson.get(), rentedDate));
-        throw new SavedNewRentalException(String.format("Rental saved! %s %s rented a %s",
-                foundedPerson.get().getFirstname(), foundedPerson.get().getLastname(), foundedBook.get().getTitle()));
+        return rentalRepository.save(new Rental(foundedBook.get(), foundedPerson.get(), rentedDate));
     }
 
     public List<Rental> findAllByPersonId(Long id) {

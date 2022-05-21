@@ -40,7 +40,7 @@ public class RentalController {
     }
 
     @PostMapping(value = "/{personId}/{bookId}")
-    public ResponseEntity<?> saveRental(@PathVariable Long bookId,
+    public Rental saveRental(@PathVariable Long bookId,
                                         @PathVariable Long personId) {
         return rentalService.saveNewRental(bookId, personId, LocalDateTime.now());
     }
