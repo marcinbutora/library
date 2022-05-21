@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +20,7 @@ class PersonRepositoryTest {
     private PersonRepository personRepository;
 
     @Test
-    public void shouldCheckPersonsAreSaved() {
+     void shouldCheckPersonsAreSaved() {
         // given
         Person marcin = new Person(1L, "Marcin", "Butora", "Żywiec", LocalDateTime.now());
         Person kacper = new Person(2L, "Kacper", "Butora", "Żywiec", LocalDateTime.now());
@@ -33,15 +34,43 @@ class PersonRepositoryTest {
     }
 
     @Test
-    public void shouldFindPersonGivenByLastname() {
+    void shouldFindPersonById() {
         // given
-        Person person = new Person(1L, "Marcin", "Butora", "Żywiec", LocalDateTime.now());
-        Person person2 = new Person(2L, "Marcin", "Kamiński", "Żywiec", LocalDateTime.now());
+        Person person = new Person("Marcin", "Butora", "Żywiec", LocalDateTime.now());
+        person.setId(1L);
+        personRepository.save(person);
 
         // when
-        List<Person> savedPersons = personRepository.saveAll(List.of(person, person2));
+        Optional<Person> personById = personRepository.findById(person.getId());
+
+        //then
+        assertThat(personById).isPresent();
+    }
+
+    @Test
+    void shouldDoNotFindByPersonId() {
+        // given
+        Long randomPersonId = 4L;
+
+        // when
+        Optional<Person> personById = personRepository.findById(randomPersonId);
 
         // then
-        assertThat(savedPersons.contains(personRepository.findByLastname("Butora")));
+        assertThat(personById).isNotPresent();
+    }
+
+    @Test
+    void shouldDeletePersonByPersonId() {
+        // given
+        Person person = new Person("Marcin", "Butora", "Żywiec", LocalDateTime.now());
+        person.setId(1L);
+        personRepository.save(person);
+
+        // when
+        personRepository.deletePersonByPersonId(person.getId());
+
+        //then
+        List<Person> personList = personRepository.findAll();
+        assertThat(personList).isEmpty();
     }
 }
