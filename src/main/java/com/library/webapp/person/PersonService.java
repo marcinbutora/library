@@ -10,8 +10,8 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class PersonService {
-    private PersonRepository personRepository;
-    private RentalRepository rentalRepository;
+    private final PersonRepository personRepository;
+    private final RentalRepository rentalRepository;
 
     public PersonService(PersonRepository personRepository, RentalRepository rentalRepository) {
         this.personRepository = personRepository;
