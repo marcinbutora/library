@@ -2,12 +2,17 @@ package com.library.webapp.rental;
 
 import com.library.webapp.book.Book;
 import com.library.webapp.person.Person;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@ToString
 @Table(name = "rental")
 public class Rental {
     @Id
@@ -73,6 +78,6 @@ public class Rental {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, book, person, rentedDate);
+        return getClass().hashCode();
     }
 }

@@ -33,33 +33,8 @@ public class BookController {
     }
 
     @PostMapping
-    ResponseEntity<BookDTO> saveBook(@RequestBody BookDTO bookDTO) {
-        BookDTO save = bookService.save(bookDTO);
+    ResponseEntity<Book> saveBook(@RequestBody Book book) {
+        Book save = bookService.save(book);
         return new ResponseEntity<>(save, HttpStatus.CREATED);
     }
-
-//    @PutMapping(value = "/{id}")
-//    public Book updateBook(@RequestBody Book book, @PathVariable("id") Long id) {
-//        return bookService.findById(id).map(b -> {
-//            b.setTitle(book.getTitle());
-//            b.setDescription(book.getDescription());
-//            b.setIsbn(book.getIsbn());
-//            return bookService.save(b);
-//        }).orElseThrow(() -> new ResourceNotFoundException("Book not found"));
-//    }
-
-    // TODO: update
-
-
-//    public BookDTO update(@RequestBody Book book, @PathVariable("id") Long id) {
-//        return BookConverter.entityToDTO(book.getId());
-//    }
-
-//    @DeleteMapping(value = "/{id}")
-//    public ResponseEntity<?> deleteBook(@PathVariable("id") Long id) {
-//        return bookService.findById(id).map(b -> {
-//            bookService.delete(b);
-//            return ResponseEntity.ok().build();
-//        }).orElseThrow(() -> new ResourceNotFoundException("Book not found"));
-//    }
 }

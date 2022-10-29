@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class BookService {
 
-    private final BookRepository bookRepository;
+    private BookRepository bookRepository;
 
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;

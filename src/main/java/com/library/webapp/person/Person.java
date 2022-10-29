@@ -1,7 +1,7 @@
 package com.library.webapp.person;
 
 import com.library.webapp.rental.Rental;
-import org.springframework.data.repository.query.Param;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "person")
+@Data
+@Table
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
