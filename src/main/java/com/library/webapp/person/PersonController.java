@@ -42,16 +42,6 @@ public class PersonController {
         return new ResponseEntity<>("Person saved successfully", HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}")
-    public Person updatePerson(@RequestBody Person person, @PathVariable Long id) {
-        return personService.findById(id).map(p -> {
-            p.setFirstname(person.getFirstname());
-            p.setLastname(person.getLastname());
-            p.setCity(person.getCity());
-            return personService.save(p);
-        }).orElseThrow(() -> new PersonNotFoundException("Person not found!"));
-    }
-
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deletePerson(@PathVariable Long id) {
         Long countRentalsByPersonId = rentalService.countRentalsOfPerson(id);
