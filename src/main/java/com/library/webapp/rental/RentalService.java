@@ -49,11 +49,11 @@ public class RentalService {
         // check if the person has already borrowed this book
         List<Rental> getAllRentals = rentalRepository.findAll();
         List<Rental> foundedRentalByPersonAndBookId = getAllRentals.stream()
-                .filter(a -> a.getPerson().getId().equals(foundedPerson.get().getId()) && a.getBook().id().equals(foundedBook.get().id()))
+                .filter(a -> a.person().id().equals(foundedPerson.get().id()) && a.book().id().equals(foundedBook.get().id()))
                 .toList();
         if (!foundedRentalByPersonAndBookId.isEmpty()) {
             throw new BookAlreadyRentedByPersonException(String.format("Book was already rented by %s %s",
-                    foundedPerson.get().getFirstname(), foundedPerson.get().getLastname()));
+                    foundedPerson.get().firstname(), foundedPerson.get().lastname()));
         }
 
         // check if the person is in arrears with returning a book for more than 30 days
