@@ -6,16 +6,12 @@ import com.library.webapp.book.BookRepository;
 import com.library.webapp.person.Person;
 import com.library.webapp.person.PersonNotFoundException;
 import com.library.webapp.person.PersonRepository;
-import com.mysql.cj.x.protobuf.Mysqlx;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -53,8 +49,8 @@ public class RentalService {
         // check if the person has already borrowed this book
         List<Rental> getAllRentals = rentalRepository.findAll();
         List<Rental> foundedRentalByPersonAndBookId = getAllRentals.stream()
-                .filter(a -> a.getPerson().getId().equals(foundedPerson.get().getId()) && a.getBook().getId().equals(foundedBook.get().getId()))
-                .collect(Collectors.toList());
+                .filter(a -> a.getPerson().getId().equals(foundedPerson.get().getId()) && a.getBook().id().equals(foundedBook.get().id()))
+                .toList();
         if (!foundedRentalByPersonAndBookId.isEmpty()) {
             throw new BookAlreadyRentedByPersonException(String.format("Book was already rented by %s %s",
                     foundedPerson.get().getFirstname(), foundedPerson.get().getLastname()));
