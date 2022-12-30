@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Value
 public record Person(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
