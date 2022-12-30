@@ -21,12 +21,12 @@ class PersonRepositoryTest {
     @Test
     public void shouldCheckPersonsAreSaved() {
         // given
-        Person marcin = new Person(1L, "Marcin", "Butora", "Żywiec", LocalDateTime.now());
-        Person kacper = new Person(2L, "Kacper", "Butora", "Żywiec", LocalDateTime.now());
-        Person maciej = new Person(3L, "Maciej", "Butora", "Żywiec", LocalDateTime.now());
+        Person randomOne = new Person(1L, "", "", "", LocalDateTime.now());
+        Person randomTwo = new Person(2L, "", "", "", LocalDateTime.now());
+        Person randomThree = new Person(3L, "", "", "", LocalDateTime.now());
 
         // when
-        List<Person> savedPersons = personRepository.saveAll(List.of(marcin, kacper, maciej));
+        List<Person> savedPersons = personRepository.saveAll(List.of(randomOne, randomTwo, randomThree));
 
         // then
         assertThat(savedPersons).isNotEmpty();
